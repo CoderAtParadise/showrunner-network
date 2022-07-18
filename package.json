@@ -1,0 +1,55 @@
+{
+    "name": "@coderatparadise/showrunner-network",
+    "version": "0.1.0",
+    "description": "Network library for showrunner modules",
+    "packageManager": "yarn@3.2.1",
+    "type": "module",
+    "files": [
+        "lib/**"
+    ],
+    "exports": {
+        ".": {
+            "types": "./lib/types/index.d.ts",
+            "import": "./lib/esm/index.js",
+            "require": "./lib/cjs/index.js"
+        },
+        "./*/.js": {
+            "types": "./lib/types/*.d.ts",
+            "import": "./lib/esm/*.js",
+            "require": "./lib/cjs/*.js"
+        }
+    },
+    "scripts": {
+        "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && tsc -p tsconfig-declarations.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/CoderAtParadies/showrunner-network"
+    },
+    "author": "CoderAtParadise",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/CoderAtParadies/showrunner-network/issues"
+    },
+    "homepage": "https://github.com/CoderAtParadies/showrunner-network/lib#readme",
+    "dependencies": {
+        "@trpc/client": "^10.0.0-alpha.38",
+        "@trpc/server": "^10.0.0-alpha.38",
+        "multicast-dns": "^7.2.5",
+        "node-fetch": "^3.2.8",
+        "ws": "^8.8.1"
+    },
+    "devDependencies": {
+        "@types/eslint": "^8.4.5",
+        "@types/ip": "^1.1.0",
+        "@types/multicast-dns": "^7.2.1",
+        "@types/node": "^18.0.5",
+        "@types/prettier": "^2.6.3",
+        "@types/ws": "^8.5.3",
+        "@yarnpkg/sdks": "^3.0.0-rc.12",
+        "eslint": "^8.19.0",
+        "eslint-config-standard": "^17.0.0",
+        "prettier": "^2.7.1",
+        "typescript": "^4.7.4"
+    }
+}
