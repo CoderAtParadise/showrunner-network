@@ -1,6 +1,6 @@
 {
     "name": "@coderatparadise/showrunner-network",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Network library for showrunner modules",
     "packageManager": "yarn@3.2.1",
     "type": "module",
