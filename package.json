@@ -25,14 +25,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/CoderAtParadies/showrunner-network"
+        "url": "https://github.com/CoderAtParadise/showrunner-network"
     },
-    "author": "CoderAtParadise",
+    "author": "CoderAtParadise <dawn0966@gmail.com>",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/CoderAtParadies/showrunner-network/issues"
+        "url": "https://github.com/CoderAtParadise/showrunner-network/issues"
     },
-    "homepage": "https://github.com/CoderAtParadies/showrunner-network/lib#readme",
+    "homepage": "https://github.com/CoderAtParadise/showrunner-network/lib#readme",
     "dependencies": {
         "@trpc/client": "^10.0.0-alpha.38",
         "@trpc/server": "^10.0.0-alpha.38",
