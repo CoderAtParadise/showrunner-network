@@ -30,7 +30,7 @@ jobs:
           echo '::echo::on'
           echo "::set-output name=scope::$(yarn config get npmScopes)"
       - run: yarn
-      - run: yarn lint
+      #- run: yarn lint
       - run: yarn build
       - run: yarn npm publish
         env:
