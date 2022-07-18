@@ -1,4 +1,4 @@
-import ws, {WebSocketServer} from "ws";
+import ws, { WebSocketServer } from "ws";
 import { AnyRouter, inferAsyncReturnType, initTRPC } from "@trpc/server";
 import multicastdns from "multicast-dns";
 import {
@@ -36,7 +36,7 @@ export function announce(
                         name: `_${service}.showrunner`,
                         type: "SRV",
                         data: {
-                            port: port,
+                            port,
                             target: `_${service}-showrunner._tcp.local`
                         }
                     },
@@ -52,12 +52,12 @@ export function announce(
     });
 }
 
-
 export function createServiceRoute(): [
     any,
     (opts: CreateHTTPContextOptions | CreateWSSContextFnOptions) => {}
-] {
+    ] {
     function createContext(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         opts: CreateHTTPContextOptions | CreateWSSContextFnOptions
     ) {
         return {};
@@ -76,13 +76,13 @@ export function startTRPCService<Router extends AnyRouter>(
     options?: multicastdns.Options
 ) {
     const { server, listen } = createHTTPServer({
-        router: router,
+        router,
         createContext: context
     });
     const wss = new WebSocketServer({ server });
     applyWSSHandler<Router>({
         wss,
-        router: router,
+        router,
         createContext: context
     });
     listen(port);
@@ -94,4 +94,4 @@ export function setupTRPCClient(mdnsOptions?: multicastdns.Options) {
     const globalAny = global as any;
     globalAny.fetch = fetch;
     globalAny.WebSocket = ws;
-}   
+}

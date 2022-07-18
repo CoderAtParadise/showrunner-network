@@ -4,40 +4,36 @@ import { ServiceDiscovery, ServiceInfo } from "./ServiceDiscovery.js";
 import { serviceManager, Service } from "./ServiceManager.js";
 
 export class ServiceTRPC<Router extends AnyRouter> implements Service<FlattenRouter<Router>> {
-    
-    constructor(id:string,retry?: { maxRetries: number; timeBetweenRetries: number[] }) {
+    constructor(id:string, retry?: { maxRetries: number; timeBetweenRetries: number[] }) {
         this.id = id;
         this.name = id;
         this.retry = retry || { maxRetries: 10, timeBetweenRetries: [10000] };
-        serviceManager.registerSource(new ServiceDiscovery(this.id,retry));
+        serviceManager.registerSource(new ServiceDiscovery(this.id, retry));
     }
 
     async open(retryHandler: () => Promise<boolean>): Promise<boolean> {
-        if(this.serviceInfo === undefined) {
+        if (this.serviceInfo === undefined) {
             const mdnsOpen = await serviceManager.openSource(`mdns:${this.id}`);
-            if(mdnsOpen) {
+            if (mdnsOpen)
                 this.serviceInfo = serviceManager.get<ServiceInfo>(`mdns:${this.id}`);
-            }
-        }
-        else if (Date.now() - this.serviceInfo.lastRetrieved > 5000) {
-            const mdnsRestart= await serviceManager.getSource(`mdns:${this.id}`)?.restart();
-            if(mdnsRestart) {
+        } else if (Date.now() - this.serviceInfo.lastRetrieved > 5000) {
+            const mdnsRestart = await serviceManager.getSource(`mdns:${this.id}`)?.restart();
+            if (mdnsRestart)
                 this.serviceInfo = serviceManager.get<ServiceInfo>(`mdns:${this.id}`);
-            }
         }
         const open = new Promise<boolean>((resolve) => {
-            const wsClient = createWSClient({url: `ws://${this.serviceInfo!.address}:${this.serviceInfo!.port}`});
+            const wsClient = createWSClient({ url: `ws://${this.serviceInfo!.address}:${this.serviceInfo!.port}` });
             this.websock = wsClient.getConnection();
             this.websock.addEventListener("open", () => this.serviceInfo!.alive = true);
-            this.websock.addEventListener("close",() => this.serviceInfo!.alive = false);
-            this.websock.addEventListener("error",() => this.serviceInfo!.alive = false);
+            this.websock.addEventListener("close", () => this.serviceInfo!.alive = false);
+            this.websock.addEventListener("error", () => this.serviceInfo!.alive = false);
             const client = createTRPCClient<Router>({
                 links: [
                     splitLink({
                         condition(op) {
-                            return op.type === "subscription"
+                            return op.type === "subscription";
                         },
-                        true: wsLink({client:wsClient}),
+                        true: wsLink({ client: wsClient }),
                         false: httpLink({
                             url: `http://${this.serviceInfo!.address}:${this.serviceInfo!.port}`
                         })
@@ -55,7 +51,7 @@ export class ServiceTRPC<Router extends AnyRouter> implements Service<FlattenRou
     }
 
     close(): void {
-            this.websock?.close();
+        this.websock?.close();
     }
 
     restart(): Promise<boolean> {
@@ -63,7 +59,7 @@ export class ServiceTRPC<Router extends AnyRouter> implements Service<FlattenRou
     }
 
     get(): FlattenRouter<Router> | undefined {
-       return this.trpcClient;
+        return this.trpcClient;
     }
 
     configure(newSettings?: object | undefined): object {
@@ -88,5 +84,4 @@ export class ServiceTRPC<Router extends AnyRouter> implements Service<FlattenRou
     websock: WebSocket | undefined;
     trpcClient: FlattenRouter<Router> | undefined;
     serviceInfo: ServiceInfo | undefined;
-
 }

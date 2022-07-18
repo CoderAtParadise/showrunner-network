@@ -10,8 +10,7 @@ export type ServiceInfo = {
 }
 
 export class ServiceDiscovery
-    implements Service<ServiceInfo>
-{
+implements Service<ServiceInfo> {
     constructor(
         id: string,
         retry?: { maxRetries: number; timeBetweenRetries: number[] }
@@ -25,7 +24,7 @@ export class ServiceDiscovery
         const open = new Promise<boolean>((resolve) => {
             const timeout = setTimeout(() => {
                 resolve(false);
-            },3000);
+            }, 3000);
             mdns.on("response", (response: ResponsePacket) => {
                 response.answers.forEach((r: any) => {
                     if (r.name.includes("showrunner")) {
@@ -56,7 +55,7 @@ export class ServiceDiscovery
         const open = new Promise<boolean>((resolve) => {
             const timeout = setTimeout(() => {
                 resolve(false);
-            },3000);
+            }, 3000);
             mdns.on("response", (response: ResponsePacket) => {
                 response.answers.forEach((r: any) => {
                     if (r.name.includes("showrunner")) {
@@ -89,9 +88,9 @@ export class ServiceDiscovery
     data(): any {}
 
     configure(newSettings?: object): object {
-        if((newSettings as any)?.alive) {
+        if ((newSettings as any)?.alive)
             this.alive = (newSettings as any).alive;
-        }
+
         return {
             id: this.id,
             retry: this.retry,
