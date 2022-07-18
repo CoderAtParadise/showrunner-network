@@ -1,6 +1,6 @@
 {
     "name": "@coderatparadise/showrunner-network",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Network library for showrunner modules",
     "packageManager": "yarn@3.2.1",
     "type": "module",
@@ -36,6 +36,7 @@
     "dependencies": {
         "@trpc/client": "^10.0.0-alpha.38",
         "@trpc/server": "^10.0.0-alpha.38",
+        "ip": "^1.1.8",
         "multicast-dns": "^7.2.5",
         "node-fetch": "^3.2.8",
         "ws": "^8.8.1"

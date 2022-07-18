@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-node", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:11.1.0"],\
             ["eslint-plugin-promise", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:6.0.0"],\
             ["eslint-plugin-tsdoc", "npm:0.2.16"],\
+            ["ip", "npm:1.1.8"],\
             ["multicast-dns", "npm:7.2.5"],\
             ["node-fetch", "npm:3.2.8"],\
             ["prettier", "npm:2.7.1"],\
@@ -105,6 +106,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-node", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:11.1.0"],\
             ["eslint-plugin-promise", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:6.0.0"],\
             ["eslint-plugin-tsdoc", "npm:0.2.16"],\
+            ["ip", "npm:1.1.8"],\
             ["multicast-dns", "npm:7.2.5"],\
             ["node-fetch", "npm:3.2.8"],\
             ["prettier", "npm:2.7.1"],\
@@ -2240,6 +2242,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["get-intrinsic", "npm:1.1.2"],\
             ["has", "npm:1.0.3"],\
             ["side-channel", "npm:1.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["ip", [\
+        ["npm:1.1.8", {\
+          "packageLocation": "./.yarn/cache/ip-npm-1.1.8-abea558b72-a2ade53eb3.zip/node_modules/ip/",\
+          "packageDependencies": [\
+            ["ip", "npm:1.1.8"]\
           ],\
           "linkType": "HARD"\
         }]\
