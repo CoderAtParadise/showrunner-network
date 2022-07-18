@@ -1,0 +1,37 @@
+name: Publish
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      #Setup .npmrc file to publish to GitHub Packages
+      - name: Setup Node 17
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@coderatparadise'
+          cache: 'yarn'
+      - name: Setup .yarnrc.yml
+        run: |
+            yarn config set npmScopes.coderatparadise.npmAuthToken $NODE_AUTH_TOKEN
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: |
+          echo '::echo::on'
+          echo "::set-output name=scope::$(yarn config get npmScopes)"
+      - run: yarn
+      - run: yarn lint
+      - run: yarn build
+      - run: yarn npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
