@@ -3,14 +3,13 @@ import { ResponsePacket } from "multicast-dns";
 import { mdns } from "./Setup.js";
 
 export type ServiceInfo = {
-    address:string;
+    address: string;
     port: number;
     alive: boolean;
     lastRetrieved: number;
-}
+};
 
-export class ServiceDiscovery
-implements Service<ServiceInfo> {
+export class ServiceDiscovery implements Service<ServiceInfo> {
     constructor(
         id: string,
         retry?: { maxRetries: number; timeBetweenRetries: number[] }
@@ -20,12 +19,14 @@ implements Service<ServiceInfo> {
         this.retry = retry || { maxRetries: 10, timeBetweenRetries: [10000] };
     }
 
-    async open(retryHandler: () => Promise<boolean>): Promise<boolean> {
+    async open(): Promise<boolean> {
         const open = new Promise<boolean>((resolve) => {
             const timeout = setTimeout(() => {
                 resolve(false);
             }, 3000);
             mdns.on("response", (response: ResponsePacket) => {
+                // disable eslint any checks as we don't have access to the actual type
+                /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
                 response.answers.forEach((r: any) => {
                     if (r.name.includes("showrunner")) {
                         if (r.name.includes(this.id)) {
@@ -34,6 +35,7 @@ implements Service<ServiceInfo> {
                         }
                     }
                 });
+                /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
                 if (this.address !== "" && this.port !== -1) {
                     this.lastRetrieved = Date.now();
                     clearTimeout(timeout);
@@ -49,7 +51,9 @@ implements Service<ServiceInfo> {
         return this.address !== "" && this.port !== -1 && this.alive;
     }
 
-    close(): void {}
+    close(): void {
+        // NOOP
+    }
 
     async restart(): Promise<boolean> {
         const open = new Promise<boolean>((resolve) => {
@@ -57,6 +61,8 @@ implements Service<ServiceInfo> {
                 resolve(false);
             }, 3000);
             mdns.on("response", (response: ResponsePacket) => {
+                // disable eslint any checks as we don't have access to the actual type
+                /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
                 response.answers.forEach((r: any) => {
                     if (r.name.includes("showrunner")) {
                         if (r.name.includes(this.id)) {
@@ -65,6 +71,7 @@ implements Service<ServiceInfo> {
                         }
                     }
                 });
+                /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
                 if (this.address !== "" && this.port !== -1) {
                     this.lastRetrieved = Date.now();
                     clearTimeout(timeout);
@@ -85,11 +92,13 @@ implements Service<ServiceInfo> {
         };
     }
 
-    data(): any {}
+    data(): void {
+        // NOOP
+    }
 
     configure(newSettings?: object): object {
-        if ((newSettings as any)?.alive)
-            this.alive = (newSettings as any).alive;
+        if ((newSettings as ServiceInfo)?.alive)
+            this.alive = (newSettings as ServiceInfo).alive;
 
         return {
             id: this.id,
@@ -101,7 +110,9 @@ implements Service<ServiceInfo> {
         };
     }
 
-    update(): void {}
+    update(): void {
+        // NOOP
+    }
 
     id: string;
     type: string = "mdns";

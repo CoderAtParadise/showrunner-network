@@ -1,4 +1,4 @@
-export interface Service<T = {}> {
+export interface Service<T = unknown> {
     readonly id: string;
     readonly type: string;
     retry: { maxRetries: number; timeBetweenRetries: number[] };
@@ -11,14 +11,15 @@ export interface Service<T = {}> {
     restart(): Promise<boolean>;
     get(): T | undefined;
     configure(newSettings?: object): object;
-    data(id: string, dataid?: string): any;
+    data(id: string, dataid?: string): unknown;
     update(): void;
     tryCounter: number;
 }
 
 export class ServiceManager {
     registerSource<T>(source: Service<T>) {
-        if (!this.sources.has(source.id)) this.sources.set(`${source.type}:${source.id}`, source);
+        if (!this.sources.has(source.id))
+            this.sources.set(`${source.type}:${source.id}`, source);
     }
 
     async openSource(id: string) {
@@ -29,15 +30,16 @@ export class ServiceManager {
                     const open = await source.open(tryOpen);
                     if (!open) {
                         source.tryCounter++;
-                        // prettier-ignore
                         const time =
-                            source.tryCounter < source.retry.timeBetweenRetries.length
-                                ? source.retry.timeBetweenRetries[source.tryCounter]
+                            source.tryCounter <
+                            source.retry.timeBetweenRetries.length
+                                ? source.retry.timeBetweenRetries[
+                                      source.tryCounter
+                                  ]
                                 : source.retry.timeBetweenRetries[
-                                    source.retry.timeBetweenRetries.length - 1
-                                ];
+                                      source.retry.timeBetweenRetries.length - 1
+                                  ];
                         if (source.tryCounter < source.retry.maxRetries) {
-                            // eslint-disable-next-line promise/param-names
                             return new Promise<boolean>((res) => {
                                 setTimeout(() => {
                                     res(tryOpen());
@@ -58,11 +60,11 @@ export class ServiceManager {
         return this.sources.get(id)?.isOpen() || false;
     }
 
-    getSource(id: string): Service<any> | undefined {
+    getSource(id: string): Service<unknown> | undefined {
         return this.sources.get(id);
     }
 
-    get<T>(id:string): T | undefined {
+    get<T>(id: string): T | undefined {
         return this.sources.get(id)?.get() as T;
     }
 
@@ -78,16 +80,16 @@ export class ServiceManager {
         this.sources.forEach((source) => source.close());
     }
 
-    getAllOfType(type: string): Service<any>[] {
-        const channels: Service<any>[] = [];
-        this.sources.forEach((value: Service<any>) => {
+    getAllOfType(type: string): Service<unknown>[] {
+        const channels: Service<unknown>[] = [];
+        this.sources.forEach((value: Service<unknown>) => {
             if (value.type === type && value.isOpen()) channels.push(value);
         });
         return channels;
     }
 
     // prettier-ignore
-    private sources: Map<string, Service<any>> = new Map<string, Service<any>>();
+    private sources: Map<string, Service<unknown>> = new Map<string, Service<unknown>>();
 }
 
 export const serviceManager = new ServiceManager();

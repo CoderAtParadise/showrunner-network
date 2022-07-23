@@ -12,7 +12,9 @@ import { AnyRouter } from "@trpc/server";
 import { ServiceDiscovery, ServiceInfo } from "./ServiceDiscovery.js";
 import { serviceManager, Service } from "./ServiceManager.js";
 
-export class ServiceTRPC<Router extends AnyRouter> implements Service<FlattenRouter<Router>> {
+export class ServiceTRPC<Router extends AnyRouter>
+    implements Service<FlattenRouter<Router>>
+{
     constructor(
         id: string,
         retry?: { maxRetries: number; timeBetweenRetries: number[] }
@@ -42,49 +44,46 @@ export class ServiceTRPC<Router extends AnyRouter> implements Service<FlattenRou
             }
         }
         const open = new Promise<boolean>((resolve) => {
-            const wsClient = createWSClient({
-                url: `ws://${this.serviceInfo!.address}:${
-                    this.serviceInfo!.port
-                }`
-            });
-            this.websock = wsClient.getConnection();
-            this.websock.addEventListener("open", () => {
-                this.serviceInfo!.alive = true;
-            });
-            this.websock.addEventListener("close", () => {
-                this.serviceInfo!.alive = false;
-            });
-            this.websock.addEventListener("error", () => {
-                this.serviceInfo!.alive = false;
-            });
-            const client = createTRPCClient<Router>({
-                links: [
-                    splitLink({
-                        condition(op) {
-                            return op.type === "subscription";
-                        },
-                        true: wsLink({ client: wsClient }),
-                        false: splitLink({
+            if (this.serviceInfo) {
+                const wsClient = createWSClient({
+                    url: `ws://${this.serviceInfo.address}:${this.serviceInfo.port}`
+                });
+                this.websock = wsClient.getConnection();
+                this.websock.addEventListener("open", () => {
+                    if (this.serviceInfo) this.serviceInfo.alive = true;
+                });
+                this.websock.addEventListener("close", () => {
+                    if (this.serviceInfo) this.serviceInfo.alive = false;
+                });
+                this.websock.addEventListener("error", () => {
+                    if (this.serviceInfo) this.serviceInfo.alive = false;
+                });
+                const client = createTRPCClient<Router>({
+                    links: [
+                        splitLink({
                             condition(op) {
-                                return op.context.skipBatch === this.true;
+                                return op.type === "subscription";
                             },
-                            true: httpLink({
-                                url: `http://${this.serviceInfo!.address}:${
-                                this.serviceInfo!.port
-                                }`
-                            }),
-                            false: httpBatchLink({
-                                url: `http://${this.serviceInfo!.address}:${this.serviceInfo!.port}`,
-                                maxURLLength: 2083
+                            true: wsLink({ client: wsClient }),
+                            false: splitLink({
+                                condition(op) {
+                                    return op.context.skipBatch === this.true;
+                                },
+                                true: httpLink({
+                                    url: `http://${this.serviceInfo.address}:${this.serviceInfo.port}`
+                                }),
+                                false: httpBatchLink({
+                                    url: `http://${this.serviceInfo.address}:${this.serviceInfo.port}`,
+                                    maxURLLength: 2083
+                                })
                             })
                         })
-                    })
-                ]
-            });
-            this.trpcClient = createTRPCClientProxy(
-                client
-            ) as FlattenRouter<Router>;
-            resolve(true);
+                    ]
+                });
+                this.trpcClient = createTRPCClientProxy(client);
+                resolve(true);
+            }
+            resolve(false);
         });
         return await open;
     }

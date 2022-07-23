@@ -26,6 +26,8 @@ export function announce(
 ): void {
     startMDNS(options);
     mdns.on("query", (query: multicastdns.QueryPacket) => {
+        // disable eslint any checks as we don't have access to the actual type
+        /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
         query.questions.forEach((q: any) => {
             if (
                 q.type === "A" &&
@@ -49,17 +51,17 @@ export function announce(
                 ]);
             }
         });
+        /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
     });
 }
 
+// disable eslint any checks as we don't have access to the actual type
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 export function createServiceRoute(): [
     any,
-    (opts: CreateHTTPContextOptions | CreateWSSContextFnOptions) => {}
-    ] {
-    function createContext(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        opts: CreateHTTPContextOptions | CreateWSSContextFnOptions
-    ) {
+    (opts: CreateHTTPContextOptions | CreateWSSContextFnOptions) => unknown
+] {
+    function createContext() {
         return {};
     }
     type Context = inferAsyncReturnType<typeof createContext>;
@@ -75,6 +77,8 @@ export function startTRPCService<Router extends AnyRouter>(
     context: any,
     options?: multicastdns.Options
 ) {
+    // No clue why this error is happenong but this is how it iw meant to be
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { server, listen } = createHTTPServer({
         router,
         createContext: context
@@ -88,10 +92,14 @@ export function startTRPCService<Router extends AnyRouter>(
     listen(port);
     announce(port, service, options);
 }
+/* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 
 export function setupTRPCClient(mdnsOptions?: multicastdns.Options) {
     startMDNS(mdnsOptions);
+    // disable eslint any checks as we don't have access to the actual type
+    /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
     const globalAny = global as any;
     globalAny.fetch = fetch;
     globalAny.WebSocket = ws;
+    /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 }
