@@ -17,6 +17,16 @@
             "types": "./lib/types/*.d.ts",
             "import": "./lib/esm/*.js",
             "require": "./lib/cjs/*.js"
+        },
+        "./codec": {
+            "types": "./lib/types/codec/index.d.ts",
+            "import": "./lib/esm/codec/index.js",
+            "require": "./lib/cjs/codec/index.js"
+        },
+        "./codec/*/.js": {
+            "types": "./lib/types/codec/*.d.ts",
+            "import": "./lib/esm/codec/*.js",
+            "require": "./lib/cjs/codec/*.js"
         }
     },
     "scripts": {
