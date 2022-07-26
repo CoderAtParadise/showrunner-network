@@ -10,7 +10,7 @@ export type serializeTypes =
 
 export interface Codec<T> {
     serialize: (obj: T) => serializeTypes;
-    deserialize: (json: serializeTypes) => T;
+    deserialize: (json: serializeTypes, obj?: T) => T;
 }
 
 const Codecs: Map<string, Codec<unknown>> = new Map<string, Codec<unknown>>();
