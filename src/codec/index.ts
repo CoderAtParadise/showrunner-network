@@ -15,7 +15,10 @@ export type {
     DefaultCodec,
     NumberCodec,
     StringCodec,
+};
+
+export {
     registerCodec,
     registerCodecAlias,
     getCodec
-};
+}
