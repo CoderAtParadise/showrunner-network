@@ -1,6 +1,6 @@
-import { Codec, serializeTypes } from "./Codec.js";
+import { Codec, serializeTypes,registerCodec,registerCodecAlias } from "./Codec.js";
 import { DefaultCodec } from "./DefaultCodec.js";
 import { NumberCodec } from "./NumberCodec.js";
 import { StringCodec } from "./StringCodec.js";
 
-export type { Codec, serializeTypes, DefaultCodec, NumberCodec, StringCodec };
+export type { Codec, serializeTypes, DefaultCodec, NumberCodec, StringCodec,registerCodec,registerCodecAlias };
