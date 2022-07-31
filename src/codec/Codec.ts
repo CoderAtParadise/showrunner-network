@@ -24,9 +24,12 @@ export const getCodec = (key: string): Codec<unknown> => {
     return DefaultCodec;
 };
 
-export const registerCodec = (key: string, codec: Codec<unknown>) => {
+// disable eslint as we want any here to avoid casting to unknown
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
+export const registerCodec = (key: string, codec: Codec<any>) => {
     Codecs.set(key, codec);
 };
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 
 export const registerCodecAlias = (key: string, codec: string) => {
     CodecAlias.set(key, codec);
