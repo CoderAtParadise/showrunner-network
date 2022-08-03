@@ -16,12 +16,14 @@ export interface Codec<T> {
 const Codecs: Map<string, Codec<unknown>> = new Map<string, Codec<unknown>>();
 const CodecAlias: Map<string, string> = new Map<string, string>();
 
-export const getCodec = (key: string): Codec<unknown> => {
+export const getCodec = (key: string,defaultCodec:boolean = true): Codec<unknown> | undefined => {
     const codec = Codecs.get(key);
     if (codec) return codec;
     const alias = CodecAlias.get(key);
     if (alias) return getCodec(alias);
-    return DefaultCodec;
+    if(defaultCodec)
+        return DefaultCodec;
+    return undefined;
 };
 
 // disable eslint as we want any here to avoid casting to unknown
