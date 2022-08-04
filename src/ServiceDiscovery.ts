@@ -28,7 +28,7 @@ export class ServiceDiscovery implements Service<ServiceInfo> {
                 // disable eslint any checks as we don't have access to the actual type
                 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
                 response.answers.forEach((r: any) => {
-                    if (r.name.includes("showrunner")) {
+                    if (r.name.includes("showrunner._tcp")) {
                         if (r.name.includes(this.id)) {
                             if (r.type === "A") this.address = r.data;
                             if (r.type === "SRV") this.port = r.data.port;
@@ -64,7 +64,7 @@ export class ServiceDiscovery implements Service<ServiceInfo> {
                 // disable eslint any checks as we don't have access to the actual type
                 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
                 response.answers.forEach((r: any) => {
-                    if (r.name.includes("showrunner")) {
+                    if (r.name.includes("showrunner._tcp")) {
                         if (r.name.includes(this.id)) {
                             if (r.type === "A") this.address = r.data;
                             if (r.type === "SRV") this.port = r.data.port;
