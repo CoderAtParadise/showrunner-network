@@ -2,13 +2,16 @@ import {
     createServiceRoute,
     startTRPCService,
     setupTRPCClient,
-    announce
+    announce,
+    mdns
 } from "./Setup.js";
 import { ServiceManager, serviceManager } from "./ServiceManager.js";
 import { ServiceDiscovery } from "./ServiceDiscovery.js";
 import { ServiceTRPC } from "./ServiceTRPC.js";
+import { TRPCClientProxy } from "./TRPCClientProxy.js";
 
 export {
+    mdns,
     announce,
     createServiceRoute,
     startTRPCService,
@@ -18,3 +21,5 @@ export {
     ServiceDiscovery,
     ServiceTRPC
 };
+
+export type { TRPCClientProxy };

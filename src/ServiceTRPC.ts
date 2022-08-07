@@ -2,7 +2,6 @@ import {
     createTRPCClient,
     createTRPCClientProxy,
     createWSClient,
-    FlattenRouter,
     httpBatchLink,
     httpLink,
     splitLink,
@@ -11,9 +10,10 @@ import {
 import { AnyRouter } from "@trpc/server";
 import { ServiceDiscovery, ServiceInfo } from "./ServiceDiscovery.js";
 import { serviceManager, Service } from "./ServiceManager.js";
+import { TRPCClientProxy } from "./TRPCClientProxy.js";
 
 export class ServiceTRPC<Router extends AnyRouter>
-    implements Service<FlattenRouter<Router>>
+    implements Service<TRPCClientProxy<Router['_def']['record']>>
 {
     constructor(
         id: string,
@@ -100,7 +100,7 @@ export class ServiceTRPC<Router extends AnyRouter>
         throw new Error("Method not implemented.");
     }
 
-    get(): FlattenRouter<Router> | undefined {
+    get(): TRPCClientProxy<Router['_def']['record']> | undefined {
         return this.trpcClient;
     }
 
@@ -124,6 +124,6 @@ export class ServiceTRPC<Router extends AnyRouter>
     port: number = -1;
     tryCounter: number = 0;
     websock: WebSocket | undefined;
-    trpcClient: FlattenRouter<Router> | undefined;
+    trpcClient: TRPCClientProxy<Router['_def']['record']> | undefined;
     serviceInfo: ServiceInfo | undefined;
 }
