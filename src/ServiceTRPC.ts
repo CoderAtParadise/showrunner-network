@@ -13,7 +13,7 @@ import { serviceManager, Service } from "./ServiceManager.js";
 import { TRPCClientProxy } from "./TRPCClientProxy.js";
 
 export class ServiceTRPC<Router extends AnyRouter>
-    implements Service<TRPCClientProxy<Router['_def']['record']>>
+    implements Service<TRPCClientProxy<Router["_def"]["record"],Router>>
 {
     constructor(
         id: string,
@@ -46,17 +46,13 @@ export class ServiceTRPC<Router extends AnyRouter>
         const open = new Promise<boolean>((resolve) => {
             if (this.serviceInfo) {
                 const wsClient = createWSClient({
-                    url: `ws://${this.serviceInfo.address}:${this.serviceInfo.port}`
-                });
-                this.websock = wsClient.getConnection();
-                this.websock.addEventListener("open", () => {
-                    if (this.serviceInfo) this.serviceInfo.alive = true;
-                });
-                this.websock.addEventListener("close", () => {
-                    if (this.serviceInfo) this.serviceInfo.alive = false;
-                });
-                this.websock.addEventListener("error", () => {
-                    if (this.serviceInfo) this.serviceInfo.alive = false;
+                    url: `ws://${this.serviceInfo.address}:${this.serviceInfo.port}`,
+                    onOpen: () => {
+                        if (this.serviceInfo) this.serviceInfo.alive = true;
+                    },
+                    onClose: () => {
+                        if (this.serviceInfo) this.serviceInfo.alive = false;
+                    }
                 });
                 const client = createTRPCClient<Router>({
                     links: [
@@ -93,14 +89,14 @@ export class ServiceTRPC<Router extends AnyRouter>
     }
 
     close(): void {
-        this.websock?.close();
+        this.trpcClient = undefined;
     }
 
     restart(): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
 
-    get(): TRPCClientProxy<Router['_def']['record']> | undefined {
+    get(): TRPCClientProxy<Router["_def"]["record"],Router> | undefined {
         return this.trpcClient;
     }
 
@@ -123,7 +119,6 @@ export class ServiceTRPC<Router extends AnyRouter>
     address: string = "";
     port: number = -1;
     tryCounter: number = 0;
-    websock: WebSocket | undefined;
-    trpcClient: TRPCClientProxy<Router['_def']['record']> | undefined;
+    trpcClient: TRPCClientProxy<Router["_def"]["record"], Router> | undefined;
     serviceInfo: ServiceInfo | undefined;
 }
