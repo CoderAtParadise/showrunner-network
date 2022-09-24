@@ -1,16 +1,16 @@
-export interface Service<T = unknown> {
-    readonly id: string;
-    readonly type: string;
-    retry: { maxRetries: number; timeBetweenRetries: number[] };
-    name: string;
-    address: string;
-    port: number;
+import { booleanReturn } from "./AsyncUtils.js";
+
+export type ServiceIdentifier = `${string}:${string}`; // type:id
+
+export interface Service<T = unknown, Settings = unknown> {
+    identifier(): ServiceIdentifier;
+    retry(): { maxRetries: number; timeBetweenRetries: number[] };
     open(retryHandler: () => Promise<boolean>): Promise<boolean>;
     isOpen(): boolean;
-    close(): void;
+    close(): Promise<boolean>;
     restart(): Promise<boolean>;
     get(): T | undefined;
-    configure(newSettings?: object): object;
+    configure(newSettings?: Settings): void;
     data(id: string, dataid?: string): unknown;
     update(): void;
     tryCounter: number;
@@ -18,11 +18,11 @@ export interface Service<T = unknown> {
 
 export class ServiceManager {
     registerSource<T>(source: Service<T>) {
-        if (!this.sources.has(source.id))
-            this.sources.set(`${source.type}:${source.id}`, source);
+        if (!this.sources.has(source.identifier()))
+            this.sources.set(source.identifier(), source);
     }
 
-    async openSource(id: string) {
+    async openSource(id: string): Promise<boolean> {
         if (!this.sources.get(id)?.isOpen()) {
             const source = this.sources.get(id);
             if (source) {
@@ -32,35 +32,37 @@ export class ServiceManager {
                         source.tryCounter++;
                         const time =
                             source.tryCounter <
-                            source.retry.timeBetweenRetries.length
-                                ? source.retry.timeBetweenRetries[
+                            source.retry().timeBetweenRetries.length
+                                ? source.retry().timeBetweenRetries[
                                       source.tryCounter
                                   ]
-                                : source.retry.timeBetweenRetries[
-                                      source.retry.timeBetweenRetries.length - 1
+                                : source.retry().timeBetweenRetries[
+                                      source.retry().timeBetweenRetries.length -
+                                          1
                                   ];
-                        if (source.tryCounter < source.retry.maxRetries) {
+                        if (source.tryCounter < source.retry().maxRetries) {
                             return new Promise<boolean>((res) => {
                                 setTimeout(() => {
                                     res(tryOpen());
                                 }, time);
                             });
-                        } else return false;
+                        } else return await booleanReturn(false);
                     } else {
                         source.tryCounter = 0;
-                        return true;
+                        return await booleanReturn(true);
                     }
                 };
                 return await tryOpen();
             }
         }
+        return await booleanReturn(false);
     }
 
     isOpen(id: string) {
         return this.sources.get(id)?.isOpen() || false;
     }
 
-    getSource(id: string): Service<unknown> | undefined {
+    getSource(id: string): Service | undefined {
         return this.sources.get(id);
     }
 
@@ -76,14 +78,20 @@ export class ServiceManager {
         return this.sources.delete(id);
     }
 
-    closeAll() {
-        this.sources.forEach((source) => source.close());
+    async closeAll(): Promise<string[]> {
+        const notClosed = [];
+        for (const [id, source] of this.sources) {
+            const closed = await source.close();
+            if (!closed) notClosed.push(id);
+        }
+        return notClosed;
     }
 
     getAllOfType(type: string): Service<unknown>[] {
         const channels: Service<unknown>[] = [];
         this.sources.forEach((value: Service<unknown>) => {
-            if (value.type === type && value.isOpen()) channels.push(value);
+            if (value.identifier().indexOf(type) === 0 && value.isOpen())
+                channels.push(value);
         });
         return channels;
     }

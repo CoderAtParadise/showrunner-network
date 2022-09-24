@@ -1,37 +1,41 @@
 {
     "name": "@coderatparadise/showrunner-network",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": "Network library for showrunner modules",
-    "packageManager": "yarn@3.2.1",
+    "packageManager": "yarn@4.0.0-rc.18",
     "type": "module",
+    "main": "./lib/cjs/index.cjs",
     "files": [
-        "lib/**"
+        "lib"
     ],
     "exports": {
         ".": {
             "types": "./lib/types/index.d.ts",
             "import": "./lib/esm/index.js",
-            "require": "./lib/cjs/index.js"
+            "require": "./lib/cjs/index.cjs"
         },
-        "./*/.js": {
+        "./package.json": "./package.json",
+        "./*.js": {
             "types": "./lib/types/*.d.ts",
             "import": "./lib/esm/*.js",
-            "require": "./lib/cjs/*.js"
+            "require": "./lib/cjs/*.cjs"
         },
         "./codec": {
             "types": "./lib/types/codec/index.d.ts",
             "import": "./lib/esm/codec/index.js",
-            "require": "./lib/cjs/codec/index.js"
+            "require": "./lib/cjs/codec/index.cjs"
         },
-        "./codec/*/.js": {
-            "types": "./lib/types/codec/*.d.ts",
-            "import": "./lib/esm/codec/*.js",
-            "require": "./lib/cjs/codec/*.js"
+        "./codec/**/*.js": {
+            "types": "./lib/types/codec/**/*.d.ts",
+            "import": "./lib/esm/codec/**/*.js",
+            "require": "./lib/cjs/codec/**/*.cjs"
         }
     },
+    "types": "./lib/types/index.d.ts",
     "scripts": {
         "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && tsc -p tsconfig-declarations.json",
         "lint": "yarn eslint src/**/*.ts",
+        "rename": "node ./scripts/rename.cjs ./lib/cjs && node ./scripts/replace.cjs ./lib/cjs",
         "pretty": "yarn prettier --write 'src/**/*.ts'"
     },
     "repository": {
@@ -46,32 +50,27 @@
     "homepage": "https://github.com/CoderAtParadise/showrunner-network/lib#readme",
     "dependencies": {
         "ip": "^1.1.8",
-        "multicast-dns": "^7.2.5",
-        "node-fetch": "^3.2.10",
-        "ws": "^8.8.1"
+        "multicast-dns": "^7.2.5"
     },
     "peerDependencies": {
-        "@trpc/client": "^10",
         "@trpc/server": "^10"
     },
     "devDependencies": {
-        "@trpc/client": "^10.0.0-alpha.42",
-        "@trpc/server": "^10.0.0-alpha.42",
-        "@types/eslint": "^8.4.5",
+        "@trpc/server": "^10.0.0-proxy-alpha.74",
+        "@types/eslint": "^8.4.6",
         "@types/ip": "^1.1.0",
         "@types/multicast-dns": "^7.2.1",
-        "@types/node": "^18.6.5",
+        "@types/node": "^18.7.16",
         "@types/prettier": "^2.7.0",
-        "@types/ws": "^8.5.3",
-        "@typescript-eslint/eslint-plugin": "^5.33.0",
-        "@typescript-eslint/parser": "^5.33.0",
-        "@yarnpkg/sdks": "^3.0.0-rc.14",
-        "eslint": "^8.21.0",
+        "@typescript-eslint/eslint-plugin": "^5.36.2",
+        "@typescript-eslint/parser": "^5.36.2",
+        "@yarnpkg/sdks": "^3.0.0-rc.18",
+        "eslint": "^8.23.0",
         "eslint-config-prettier": "^8.5.0",
-        "eslint-import-resolver-typescript": "^3.4.0",
+        "eslint-import-resolver-typescript": "^3.5.1",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-tsdoc": "^0.2.16",
         "prettier": "^2.7.1",
-        "typescript": "^4.7.4"
+        "typescript": "^4.8.3"
     }
 }

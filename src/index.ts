@@ -1,25 +1,26 @@
+import { announceService, mdns, startMDNS } from "./Setup.js";
+import { Service, ServiceIdentifier, ServiceManager, serviceManager } from "./ServiceManager.js";
+import { ServiceDiscovery, ServiceInfo } from "./ServiceDiscovery.js";
+import * as AsyncUtils from "./AsyncUtils.js";
 import {
-    createServiceRoute,
-    startTRPCService,
-    setupTRPCClient,
-    announce,
-    mdns
-} from "./Setup.js";
-import { ServiceManager, serviceManager } from "./ServiceManager.js";
-import { ServiceDiscovery } from "./ServiceDiscovery.js";
-import { ServiceTRPC } from "./ServiceTRPC.js";
-import { TRPCClientProxy } from "./TRPCClientProxy.js";
+    IDispatcher,
+    MessageType,
+    DispatchInfo,
+    DispatchReturn,
+} from "./IDispatcher.js";
+import {trpc} from "./trpc.js";
 
 export {
     mdns,
-    announce,
-    createServiceRoute,
-    startTRPCService,
-    setupTRPCClient,
+    announceService,
+    startMDNS,
+    Service,
     ServiceManager,
     serviceManager,
     ServiceDiscovery,
-    ServiceTRPC
+    AsyncUtils,
+    IDispatcher,
+    trpc
 };
 
-export type { TRPCClientProxy };
+export type { ServiceInfo,ServiceIdentifier, MessageType,DispatchInfo, DispatchReturn };
