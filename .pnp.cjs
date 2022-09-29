@@ -28,8 +28,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@trpc/server", "npm:10.0.0-proxy-alpha.74"],\
           ["@types/eslint", "npm:8.4.6"],\
-          ["@types/ip", "npm:1.1.0"],\
-          ["@types/multicast-dns", "npm:7.2.1"],\
           ["@types/node", "npm:18.7.16"],\
           ["@types/prettier", "npm:2.7.0"],\
           ["@typescript-eslint/eslint-plugin", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:5.36.2"],\
@@ -40,8 +38,6 @@ const RAW_RUNTIME_STATE =
           ["eslint-import-resolver-typescript", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:3.5.1"],\
           ["eslint-plugin-import", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:2.26.0"],\
           ["eslint-plugin-tsdoc", "npm:0.2.16"],\
-          ["ip", "npm:1.1.8"],\
-          ["multicast-dns", "npm:7.2.5"],\
           ["prettier", "npm:2.7.1"],\
           ["typescript", "patch:typescript@npm%3A4.8.3#optional!builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"]\
         ],\
@@ -65,8 +61,6 @@ const RAW_RUNTIME_STATE =
           ["@coderatparadise/showrunner-network", "workspace:."],\
           ["@trpc/server", "npm:10.0.0-proxy-alpha.74"],\
           ["@types/eslint", "npm:8.4.6"],\
-          ["@types/ip", "npm:1.1.0"],\
-          ["@types/multicast-dns", "npm:7.2.1"],\
           ["@types/node", "npm:18.7.16"],\
           ["@types/prettier", "npm:2.7.0"],\
           ["@typescript-eslint/eslint-plugin", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:5.36.2"],\
@@ -77,8 +71,6 @@ const RAW_RUNTIME_STATE =
           ["eslint-import-resolver-typescript", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:3.5.1"],\
           ["eslint-plugin-import", "virtual:5506184455ee77b49f1a5bf0db896034306bf5041282d772947f4734425cc01a501dc2f3e0c716051d685cbbc2f6a0d83f7c2ef11715505f18629311719ccc1b#npm:2.26.0"],\
           ["eslint-plugin-tsdoc", "npm:0.2.16"],\
-          ["ip", "npm:1.1.8"],\
-          ["multicast-dns", "npm:7.2.5"],\
           ["prettier", "npm:2.7.1"],\
           ["typescript", "patch:typescript@npm%3A4.8.3#optional!builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"]\
         ],\
@@ -138,15 +130,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@humanwhocodes-object-schema-npm-1.2.1-eb622b5d0e-9.zip/node_modules/@humanwhocodes/object-schema/",\
         "packageDependencies": [\
           ["@humanwhocodes/object-schema", "npm:1.2.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@leichtgewicht/ip-codec", [\
-      ["npm:2.0.4", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@leichtgewicht-ip-codec-npm-2.0.4-dd4d657af8-9.zip/node_modules/@leichtgewicht/ip-codec/",\
-        "packageDependencies": [\
-          ["@leichtgewicht/ip-codec", "npm:2.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -260,16 +243,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@types/dns-packet", [\
-      ["npm:5.2.4", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@types-dns-packet-npm-5.2.4-44f2da8ae2-9.zip/node_modules/@types/dns-packet/",\
-        "packageDependencies": [\
-          ["@types/dns-packet", "npm:5.2.4"],\
-          ["@types/node", "npm:18.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@types/emscripten", [\
       ["npm:1.39.6", {\
         "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@types-emscripten-npm-1.39.6-c9c4021365-9.zip/node_modules/@types/emscripten/",\
@@ -308,16 +281,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@types/ip", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@types-ip-npm-1.1.0-f09dd11865-9.zip/node_modules/@types/ip/",\
-        "packageDependencies": [\
-          ["@types/ip", "npm:1.1.0"],\
-          ["@types/node", "npm:18.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@types/json-buffer", [\
       ["npm:3.0.0", {\
         "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@types-json-buffer-npm-3.0.0-9f2fe89eaa-9.zip/node_modules/@types/json-buffer/",\
@@ -350,17 +313,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@types-keyv-npm-3.1.4-a8082ea56b-9.zip/node_modules/@types/keyv/",\
         "packageDependencies": [\
           ["@types/keyv", "npm:3.1.4"],\
-          ["@types/node", "npm:18.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/multicast-dns", [\
-      ["npm:7.2.1", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@types-multicast-dns-npm-7.2.1-60a1372f00-9.zip/node_modules/@types/multicast-dns/",\
-        "packageDependencies": [\
-          ["@types/multicast-dns", "npm:7.2.1"],\
-          ["@types/dns-packet", "npm:5.2.4"],\
           ["@types/node", "npm:18.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -1197,16 +1149,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["dir-glob", "npm:3.0.1"],\
           ["path-type", "npm:4.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["dns-packet", [\
-      ["npm:5.4.0", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/dns-packet-npm-5.4.0-4d0332a163-9.zip/node_modules/dns-packet/",\
-        "packageDependencies": [\
-          ["dns-packet", "npm:5.4.0"],\
-          ["@leichtgewicht/ip-codec", "npm:2.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2136,15 +2078,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["ip", [\
-      ["npm:1.1.8", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/ip-npm-1.1.8-abea558b72-9.zip/node_modules/ip/",\
-        "packageDependencies": [\
-          ["ip", "npm:1.1.8"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["is-bigint", [\
       ["npm:1.0.4", {\
         "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/is-bigint-npm-1.0.4-31c2eecbc9-9.zip/node_modules/is-bigint/",\
@@ -2576,17 +2509,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/ms-npm-2.1.3-81ff3cfac1-9.zip/node_modules/ms/",\
         "packageDependencies": [\
           ["ms", "npm:2.1.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["multicast-dns", [\
-      ["npm:7.2.5", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/multicast-dns-npm-7.2.5-e1c9c3ec64-9.zip/node_modules/multicast-dns/",\
-        "packageDependencies": [\
-          ["multicast-dns", "npm:7.2.5"],\
-          ["dns-packet", "npm:5.4.0"],\
-          ["thunky", "npm:1.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3179,15 +3101,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/text-table-npm-0.2.0-d92a778b59-9.zip/node_modules/text-table/",\
         "packageDependencies": [\
           ["text-table", "npm:0.2.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["thunky", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/thunky-npm-1.1.0-2d25531f44-9.zip/node_modules/thunky/",\
-        "packageDependencies": [\
-          ["thunky", "npm:1.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\

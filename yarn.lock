@@ -20,8 +20,6 @@ __metadata:
   dependencies:
     "@trpc/server": "npm:^10.0.0-proxy-alpha.74"
     "@types/eslint": "npm:^8.4.6"
-    "@types/ip": "npm:^1.1.0"
-    "@types/multicast-dns": "npm:^7.2.1"
     "@types/node": "npm:^18.7.16"
     "@types/prettier": "npm:^2.7.0"
     "@typescript-eslint/eslint-plugin": "npm:^5.36.2"
@@ -32,8 +30,6 @@ __metadata:
     eslint-import-resolver-typescript: "npm:^3.5.1"
     eslint-plugin-import: "npm:^2.26.0"
     eslint-plugin-tsdoc: "npm:^0.2.16"
-    ip: "npm:^1.1.8"
-    multicast-dns: "npm:^7.2.5"
     prettier: "npm:^2.7.1"
     typescript: "npm:^4.8.3"
   peerDependencies:
@@ -87,13 +83,6 @@ __metadata:
   version: 1.2.1
   resolution: "@humanwhocodes/object-schema@npm:1.2.1"
   checksum: c860f96faaaaecd6c5c4ee6912f7c761579031b464c3cf55832e59e18b116968d89b570ef6a9a10b1670a67e7998a530c8c549b4a41b118153340772ad10cea9
-  languageName: node
-  linkType: hard
-
-"@leichtgewicht/ip-codec@npm:^2.0.1":
-  version: 2.0.4
-  resolution: "@leichtgewicht/ip-codec@npm:2.0.4"
-  checksum: 0b165c5a64ebffd5ede0889f947548276871a94cd43516d4a6055681a307f7e4586946175f07eb37ee4fd4ed1fe0ced099d073a63553bfdb27bb6bcf5bbee557
   languageName: node
   linkType: hard
 
@@ -192,15 +181,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dns-packet@npm:*":
-  version: 5.2.4
-  resolution: "@types/dns-packet@npm:5.2.4"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 9901f3676313066cac5b9fc2cc2dee1f227f7505c8fe77ffba1843a1ca65c3ba33c5767c1dec0d90e7c7035776c15baba6db90270a4606be90fceb8c52d19ccd
-  languageName: node
-  linkType: hard
-
 "@types/emscripten@npm:^1.39.6":
   version: 1.39.6
   resolution: "@types/emscripten@npm:1.39.6"
@@ -232,15 +212,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ip@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@types/ip@npm:1.1.0"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: cdb991bd40376fed4d39f0b009103d064f40093521c702ddba6d49dfed73bcbea127e44f2d2703f43c31d1e961ffc3fa7d75296bebc859329adbcc66f0d0b9f9
-  languageName: node
-  linkType: hard
-
 "@types/json-buffer@npm:~3.0.0":
   version: 3.0.0
   resolution: "@types/json-buffer@npm:3.0.0"
@@ -268,16 +239,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: c1fbfe6e2a8c82656c8fc5782d937c82ed336cdca451c4d7a8d08d245531ad21572024d621b38071d34cfb7461702eea79fcf222a03264f00564d75e78bd348d
-  languageName: node
-  linkType: hard
-
-"@types/multicast-dns@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@types/multicast-dns@npm:7.2.1"
-  dependencies:
-    "@types/dns-packet": "npm:*"
-    "@types/node": "npm:*"
-  checksum: ae10554d7ba15209654b9325e4b09bef92dd31658564f948ab574f4cca778c1d5a7f1d525c09d901122097f65b02932e43fcc86ff4113cd1a6ca84db89bac7c3
   languageName: node
   linkType: hard
 
@@ -908,15 +869,6 @@ __metadata:
   dependencies:
     path-type: "npm:^4.0.0"
   checksum: 713590b89f9d09b80da82094419260ee15f4e67da692659876ac747ee38788dbb8b2bd5d2749bbcf298ce934888e378569f01895a136a09b54d1b28753e337c7
-  languageName: node
-  linkType: hard
-
-"dns-packet@npm:^5.2.2":
-  version: 5.4.0
-  resolution: "dns-packet@npm:5.4.0"
-  dependencies:
-    "@leichtgewicht/ip-codec": "npm:^2.0.1"
-  checksum: 91e914f15152cae5268d8a21a12afbdfecbdc23971820c62ac4468bf96e07d166463b995d066d78807d3de3d7e5381ee636cbb2d2e2c10911c44f54a8a3556b1
   languageName: node
   linkType: hard
 
@@ -1673,13 +1625,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ip@npm:^1.1.8":
-  version: 1.1.8
-  resolution: "ip@npm:1.1.8"
-  checksum: bb1850e7b6573a53b7fd8becad4c81e0026b94d2a3322bb8540ab67fa3987c7401d1f2986fe6119f1578464ac465dad2c8b243c08c748f1f88c350c64cc9d134
-  languageName: node
-  linkType: hard
-
 "is-bigint@npm:^1.0.1":
   version: 1.0.4
   resolution: "is-bigint@npm:1.0.4"
@@ -2067,18 +2012,6 @@ __metadata:
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: 78c12f6b473a022ebacc393fc14b76fe40b8feda7218124b86c4684e440e10377a063bec1d3902df1f74714f02b74b36ad7d3a6de9e2fbffa26fc29e5ce018fc
-  languageName: node
-  linkType: hard
-
-"multicast-dns@npm:^7.2.5":
-  version: 7.2.5
-  resolution: "multicast-dns@npm:7.2.5"
-  dependencies:
-    dns-packet: "npm:^5.2.2"
-    thunky: "npm:^1.0.2"
-  bin:
-    multicast-dns: cli.js
-  checksum: ce090ef9e93c73179c78c9f8cb3bb1d4e06266b7914ba6dec371ef2ded3ceed4ec7788fbb41688385b3b84bd152afb8f213b33ef6dbf69a57a47ff47e01fc23c
   languageName: node
   linkType: hard
 
@@ -2621,13 +2554,6 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: 65e9ab9cd26946c5378cd4b8782562f47e017bad4fe8d398356380fdc762d08b177ca6a1c5c8deac14fbe974c46cd09c0cbb86560545cfa49800f3fcacb0c952
-  languageName: node
-  linkType: hard
-
-"thunky@npm:^1.0.2":
-  version: 1.1.0
-  resolution: "thunky@npm:1.1.0"
-  checksum: f11ef2d8a31915498d7e33cd7e6c46f6165c7d221aa052695039646ecf670b6cb9d3d9883f43054133642e1d526204d91b6852e6d01841c33b0878d26649b906
   languageName: node
   linkType: hard
 

@@ -1,6 +1,6 @@
 {
     "name": "@coderatparadise/showrunner-network",
-    "version": "1.5.0",
+    "version": "2.0.0",
     "description": "Network library for showrunner modules",
     "packageManager": "yarn@4.0.0-rc.18",
     "type": "module",
@@ -48,18 +48,12 @@
         "url": "https://github.com/CoderAtParadise/showrunner-network/issues"
     },
     "homepage": "https://github.com/CoderAtParadise/showrunner-network/lib#readme",
-    "dependencies": {
-        "ip": "^1.1.8",
-        "multicast-dns": "^7.2.5"
-    },
     "peerDependencies": {
         "@trpc/server": "^10"
     },
     "devDependencies": {
         "@trpc/server": "^10.0.0-proxy-alpha.74",
         "@types/eslint": "^8.4.6",
-        "@types/ip": "^1.1.0",
-        "@types/multicast-dns": "^7.2.1",
         "@types/node": "^18.7.16",
         "@types/prettier": "^2.7.0",
         "@typescript-eslint/eslint-plugin": "^5.36.2",
