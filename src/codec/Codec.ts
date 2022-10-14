@@ -8,8 +8,6 @@ export type serializeTypes =
     | string[]
     | number[];
 
-8;
-
 /**
  * Interface for serializing and deserializing for networking and file saving
  * @typeParam SerializeType - Type to serialize from

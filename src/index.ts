@@ -1,12 +1,17 @@
-import { Service, ServiceIdentifier, ServiceManager, serviceManager } from "./ServiceManager.js";
+import {
+    Service,
+    ServiceIdentifier,
+    ServiceManager,
+    serviceManager
+} from "./ServiceManager.js";
 import * as AsyncUtils from "./AsyncUtils.js";
 import {
     IDispatcher,
     MessageType,
     DispatchInfo,
-    DispatchReturn,
+    DispatchReturn
 } from "./IDispatcher.js";
-import {trpc} from "./trpc.js";
+import * as codec from "./codec/index.js";
 
 export {
     Service,
@@ -14,7 +19,7 @@ export {
     serviceManager,
     AsyncUtils,
     IDispatcher,
-    trpc
+    codec
 };
 
-export type { ServiceIdentifier, MessageType,DispatchInfo, DispatchReturn };
+export type { ServiceIdentifier, MessageType, DispatchInfo, DispatchReturn };
