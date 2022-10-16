@@ -18,7 +18,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coderatparadise/showrunner-network@workspace:."
   dependencies:
-    "@trpc/server": "npm:^10.0.0-proxy-alpha.74"
     "@types/eslint": "npm:^8.4.6"
     "@types/node": "npm:^18.7.16"
     "@types/prettier": "npm:^2.7.0"
@@ -32,8 +31,6 @@ __metadata:
     eslint-plugin-tsdoc: "npm:^0.2.16"
     prettier: "npm:^2.7.1"
     typescript: "npm:^4.8.3"
-  peerDependencies:
-    "@trpc/server": ^10
   languageName: unknown
   linkType: soft
 
@@ -159,13 +156,6 @@ __metadata:
   dependencies:
     defer-to-connect: "npm:^2.0.0"
   checksum: d927951bccbbad4cb713af7378ad4d17b34e48725ea4641ad01f79b310564e3db2b173c4f81cb3b945dbf8b3dbcb4da7b8d0f2e754e79dc1b92c69a18ba0ac41
-  languageName: node
-  linkType: hard
-
-"@trpc/server@npm:^10.0.0-proxy-alpha.74":
-  version: 10.0.0-proxy-alpha.74
-  resolution: "@trpc/server@npm:10.0.0-proxy-alpha.74"
-  checksum: ddf2b87494a1e5d897450e7243ed289bc5b62b117dceb37dddf85cc54de1b4db36f378c46b297495791adc26736aace897ee962f389fdd9e3eb0c175f61ddfa3
   languageName: node
   linkType: hard
 

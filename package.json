@@ -48,11 +48,7 @@
         "url": "https://github.com/CoderAtParadise/showrunner-network/issues"
     },
     "homepage": "https://github.com/CoderAtParadise/showrunner-network/lib#readme",
-    "peerDependencies": {
-        "@trpc/server": "^10"
-    },
     "devDependencies": {
-        "@trpc/server": "^10.0.0-proxy-alpha.74",
         "@types/eslint": "^8.4.6",
         "@types/node": "^18.7.16",
         "@types/prettier": "^2.7.0",

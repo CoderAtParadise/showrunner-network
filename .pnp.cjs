@@ -26,7 +26,6 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@trpc/server", "npm:10.0.0-proxy-alpha.74"],\
           ["@types/eslint", "npm:8.4.6"],\
           ["@types/node", "npm:18.7.16"],\
           ["@types/prettier", "npm:2.7.0"],\
@@ -59,7 +58,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@coderatparadise/showrunner-network", "workspace:."],\
-          ["@trpc/server", "npm:10.0.0-proxy-alpha.74"],\
           ["@types/eslint", "npm:8.4.6"],\
           ["@types/node", "npm:18.7.16"],\
           ["@types/prettier", "npm:2.7.0"],\
@@ -217,15 +215,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@szmarczak/http-timer", "npm:4.0.6"],\
           ["defer-to-connect", "npm:2.0.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@trpc/server", [\
-      ["npm:10.0.0-proxy-alpha.74", {\
-        "packageLocation": "../../../../C:/Users/dawn0/AppData/Local/Yarn/Berry/cache/@trpc-server-npm-10.0.0-proxy-alpha.74-80173ab69d-9.zip/node_modules/@trpc/server/",\
-        "packageDependencies": [\
-          ["@trpc/server", "npm:10.0.0-proxy-alpha.74"]\
         ],\
         "linkType": "HARD"\
       }]\
