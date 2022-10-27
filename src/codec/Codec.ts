@@ -1,4 +1,6 @@
 import { DefaultCodec } from "./DefaultCodec.js";
+import { NumberCodec } from "./NumberCodec.js";
+import { StringCodec } from "./StringCodec.js";
 
 export type serializeTypes =
     | object
@@ -34,6 +36,7 @@ const CodecAlias: Map<string, string> = new Map<string, string>();
  * @returns the {@link Codec} or {@link DefaultCodec} if not found
  */
 export const getCodec = (key: string): Codec<unknown, unknown> | undefined => {
+    registerInBuiltCodecs();
     const codec = Codecs.get(key);
     if (codec) return codec;
     const alias = CodecAlias.get(key);
@@ -50,6 +53,7 @@ export const getCodec = (key: string): Codec<unknown, unknown> | undefined => {
  * @param codec - Codec to register
  */
 export const registerCodec = (key: string, codec: Codec<any, any>) => {
+    registerInBuiltCodecs();
     Codecs.set(key, codec);
 };
 
@@ -61,5 +65,14 @@ export const registerCodec = (key: string, codec: Codec<any, any>) => {
  * @param codec - Codec identifier
  */
 export const registerCodecAlias = (alias: string, codec: string) => {
+    registerInBuiltCodecs();
     CodecAlias.set(alias, codec);
 };
+
+function registerInBuiltCodecs() {
+    if (!Codecs.has("default")) {
+        Codecs.set("default", DefaultCodec);
+        Codecs.set("string", StringCodec as Codec<any, any>);
+        Codecs.set("number", NumberCodec as Codec<any, any>);
+    }
+}
