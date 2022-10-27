@@ -35,7 +35,7 @@ const CodecAlias: Map<string, string> = new Map<string, string>();
  * @param key - Codec identifier
  * @returns the {@link Codec} or {@link DefaultCodec} if not found
  */
-export const getCodec = (key: string): Codec<unknown, unknown> | undefined => {
+export const getCodec = (key: string): Codec<unknown, unknown> => {
     registerInBuiltCodecs();
     const codec = Codecs.get(key);
     if (codec) return codec;
