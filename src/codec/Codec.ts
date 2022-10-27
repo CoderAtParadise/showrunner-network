@@ -30,20 +30,15 @@ const CodecAlias: Map<string, string> = new Map<string, string>();
 
 /**
  * Returns the codec with a given key
- * @param key - Codec identifier 
- * @param defaultCodec - Whether the default codec is returned. Default true.
- * @returns the {@link Codec} or undefined if {@link defaultCodec} is false
+ * @param key - Codec identifier
+ * @returns the {@link Codec} or {@link DefaultCodec} if not found
  */
-export const getCodec = (
-    key: string,
-    defaultCodec: boolean = true
-): Codec<unknown, unknown> | undefined => {
+export const getCodec = (key: string): Codec<unknown, unknown> | undefined => {
     const codec = Codecs.get(key);
     if (codec) return codec;
     const alias = CodecAlias.get(key);
     if (alias) return getCodec(alias);
-    if (defaultCodec) return DefaultCodec;
-    return undefined;
+    return DefaultCodec;
 };
 
 // disable eslint as we want any here to avoid casting to unknown
@@ -51,7 +46,7 @@ export const getCodec = (
 
 /**
  * Registers a Codec
- * @param key - Codec identifier 
+ * @param key - Codec identifier
  * @param codec - Codec to register
  */
 export const registerCodec = (key: string, codec: Codec<any, any>) => {
