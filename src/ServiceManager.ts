@@ -3,21 +3,22 @@ import { booleanReturn } from "./AsyncUtils.js";
 export type ServiceIdentifier = `${string}:${string}`; // type:id
 
 export interface Service<T = unknown, Settings = unknown> {
-    identifier(): ServiceIdentifier;
-    retry(): { maxRetries: number; timeBetweenRetries: number[] };
-    open(retryHandler: () => Promise<boolean>): Promise<boolean>;
-    isOpen(): boolean;
-    close(): Promise<boolean>;
-    restart(): Promise<boolean>;
-    get(): T | undefined;
-    configure(newSettings?: Settings): void;
-    data(id: string, dataid?: string): unknown;
-    update(): void;
+    identifier: () => ServiceIdentifier;
+    retry: () => { maxRetries: number; timeBetweenRetries: number[] };
+    open: (retryHandler: () => Promise<boolean>) => Promise<boolean>;
+    isOpen: () => boolean;
+    close: () => Promise<boolean>;
+    restart: () => Promise<boolean>;
+    get: () => T | undefined;
+    config: (newSettings?: Settings) => Settings;
+    data: (id: string, dataid?: string) => unknown;
+    update: () => void;
     tryCounter: number;
 }
 
 export class ServiceManager {
-    registerSource<T>(source: Service<T>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    registerSource(source: Service<any, any>) {
         if (!this.sources.has(source.identifier()))
             this.sources.set(source.identifier(), source);
     }

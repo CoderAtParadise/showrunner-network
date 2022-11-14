@@ -20,7 +20,8 @@ export interface Codec<SerializeType, DeserializeType = SerializeType> {
     serialize: (obj: SerializeType) => serializeTypes;
     deserialize: (
         json: serializeTypes,
-        obj?: DeserializeType
+        obj?: DeserializeType,
+        additional?: object
     ) => DeserializeType;
 }
 

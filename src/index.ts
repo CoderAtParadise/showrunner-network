@@ -4,6 +4,7 @@ import {
     ServiceManager,
     serviceManager
 } from "./ServiceManager.js";
+import { NetworkConnection } from "./NetworkConnection.js";
 import * as AsyncUtils from "./AsyncUtils.js";
 import {
     IDispatcher,
@@ -22,4 +23,10 @@ export {
     codec
 };
 
-export type { ServiceIdentifier, MessageType, DispatchInfo, DispatchReturn };
+export type {
+    ServiceIdentifier,
+    MessageType,
+    DispatchInfo,
+    DispatchReturn,
+    NetworkConnection
+};
