@@ -5,7 +5,7 @@ export type ServiceIdentifier = `${string}:${string}`; // type:id
 export interface Service<T = unknown, Settings = unknown> {
     identifier: () => ServiceIdentifier;
     retry: () => { maxRetries: number; timeBetweenRetries: number[] };
-    open: (retryHandler: () => Promise<boolean>) => Promise<boolean>;
+    open: (retryHandler: (tryCounter:number) => Promise<boolean>) => Promise<boolean>;
     isOpen: () => boolean;
     close: () => Promise<boolean>;
     restart: () => Promise<boolean>;
@@ -13,7 +13,6 @@ export interface Service<T = unknown, Settings = unknown> {
     config: (newSettings?: Settings) => Settings;
     data: (id: string, dataid?: string) => unknown;
     update: () => void;
-    tryCounter: number;
 }
 
 export class ServiceManager {
@@ -27,31 +26,29 @@ export class ServiceManager {
         if (!this.sources.get(id)?.isOpen()) {
             const source = this.sources.get(id);
             if (source) {
-                const tryOpen = async (): Promise<boolean> => {
+                const tryOpen = async (tryCounter:number = 0): Promise<boolean> => {
                     const open = await source.open(tryOpen);
                     if (!open) {
-                        source.tryCounter++;
+                        tryCounter = tryCounter++;
                         const time =
-                            source.tryCounter <
+                            tryCounter <
                             source.retry().timeBetweenRetries.length
                                 ? source.retry().timeBetweenRetries[
-                                      source.tryCounter
+                                      tryCounter
                                   ]
                                 : source.retry().timeBetweenRetries[
                                       source.retry().timeBetweenRetries.length -
                                           1
                                   ];
-                        if (source.tryCounter < source.retry().maxRetries) {
+                        if (tryCounter < source.retry().maxRetries) {
                             return new Promise<boolean>((res) => {
                                 setTimeout(() => {
                                     res(tryOpen());
                                 }, time);
                             });
                         } else return await booleanReturn(false);
-                    } else {
-                        source.tryCounter = 0;
+                    } else
                         return await booleanReturn(true);
-                    }
                 };
                 return await tryOpen();
             }
